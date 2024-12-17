@@ -1,5 +1,58 @@
 'use client';
+
+import { useState } from 'react';
+import { z } from 'zod';
+
+const contactSchema = z.object({
+  name: z.string().min(10, 'Name is required'),
+  email: z.string().email('Invalid email address'),
+  message: z.string().min(10, 'Message is required'),
+});
+
 export function Contact() {
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus('sending');
+    setErrorMessage('');
+
+    const formData = new FormData(e.target as HTMLFormElement);
+    const data = {
+      name: String(formData.get('name') ?? ''),
+      email: String(formData.get('email') ?? ''),
+      message: String(formData.get('message') ?? ''),
+    };
+
+    try {
+      const validated = contactSchema.parse(data);
+
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(validated),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.error ?? 'Failed to send');
+      }
+
+      setStatus('success');
+      (e.target as HTMLFormElement).reset();
+    } catch (error) {
+      setStatus('error');
+      if (error instanceof z.ZodError) {
+        setErrorMessage(error.errors.map((e) => e.message).join(', '));
+      } else {
+        setErrorMessage(error instanceof Error ? error.message : 'Failed to send email');
+      }
+    }
+  }
+
+
   return (
     <section
       id="contact"
@@ -198,7 +251,7 @@ export function Contact() {
           </div>
           <form
             style={{ display: 'flex', flexDirection: 'column' }}
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={handleSubmit}
           >
             <div style={{ marginBottom: '1rem' }}>
               <label
@@ -215,6 +268,7 @@ export function Contact() {
                 Name
               </label>
               <input
+                name="name"
                 type="text"
                 placeholder="Your name"
                 style={{
@@ -245,6 +299,7 @@ export function Contact() {
                 Email
               </label>
               <input
+                name="email"
                 type="email"
                 placeholder="your@email.com"
                 style={{
@@ -275,6 +330,7 @@ export function Contact() {
                 Message
               </label>
               <textarea
+                name="message"
                 placeholder="Tell me about the role or project..."
                 rows={4}
                 style={{
@@ -291,8 +347,31 @@ export function Contact() {
                 className="focus:border-[var(--accent)]"
               />
             </div>
+            {errorMessage && (
+              <p
+                style={{
+                  fontSize: '0.8rem',
+                  color: '#ef4444',
+                  marginBottom: '1rem',
+                }}
+              >
+                {errorMessage}
+              </p>
+            )}
+            {status === 'success' && (
+              <p
+                style={{
+                  fontSize: '0.8rem',
+                  color: 'var(--accent2)',
+                  marginBottom: '1rem',
+                }}
+              >
+                Message sent successfully!
+              </p>
+            )}
             <button
               type="submit"
+              disabled={status === 'sending'}
               style={{
                 fontFamily: 'var(--font-mono)',
                 fontSize: '0.8rem',
@@ -302,11 +381,12 @@ export function Contact() {
                 background: 'var(--accent)',
                 border: 'none',
                 padding: '1rem 2rem',
-                cursor: 'pointer',
+                cursor: status === 'sending' ? 'not-allowed' : 'pointer',
                 width: '100%',
+                opacity: status === 'sending' ? 0.7 : 1,
               }}
             >
-              Send Message
+              {status === 'sending' ? 'Sending...' : 'Send Message'}
             </button>
           </form>
         </div>
