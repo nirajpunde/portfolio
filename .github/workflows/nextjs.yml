@@ -79,6 +79,11 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
+      - name: Set environment variables
+          env:
+            SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+        
+          
 
   # Deployment job
   deploy:
