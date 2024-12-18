@@ -82,8 +82,11 @@ jobs:
       - name: Set environment variables
         env:
           SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
-        
+        run:
+          echo "SENDGRID_API_KEY=${{ env.SENDGRID_API_KEY }}" >> .env
           
+
+
 
   # Deployment job
   deploy:
