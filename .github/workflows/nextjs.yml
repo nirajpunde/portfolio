@@ -80,8 +80,8 @@ jobs:
         with:
           path: ./out
       - name: Set environment variables
-          env:
-            SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+        env:
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
         
           
 
