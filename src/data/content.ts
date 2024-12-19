@@ -220,16 +220,49 @@ For cancellation prediction (98% accuracy), the problem is more tractable — ca
 
 export const experience = [
   {
-    period: 'AUG 2019 — AUG 2023',
-    role: 'Full Stack Developer',
+    period: 'JAN 2022 — AUG 2023',
+    role: 'Full Stack Developer (ENO2 / SDE2)',
     company: 'Credit Suisse · Pune, India',
     bullets: [
-      'Built and maintained real-time data dashboard processing 2.7M+ daily trades using Kafka, managing $20B in daily volume',
-      'Developed Angular 13 front-end for critical workflow tracking app, reducing Excel reliance by 90%',
-      'Engineered reusable Angular Material CDK components saving 2–3 weeks per integration',
-      'Designed securities balance computation tool achieving 99% real-time accuracy',
+      'Led technical design and architecture for real-time trade dashboard processing 2.7M+ daily trades using Kafka, managing $20B in daily volume',
+      'Designed securities balance computation tool achieving 99% real-time accuracy; drove stakeholder alignment on requirements and rollout',
       'Implemented recommendation engine preventing settlement breaks valued at $50M+',
-      'Orchestrated MongoDB cluster PoC with 99% uptime, certificate-based auth, and replication',
+      'Mentored 2 junior developers on Angular, Spring Boot, and Kafka best practices; conducted code reviews and pair programming sessions',
+      'Collaborated with product owners and operations teams to translate business needs into technical specifications',
+      'Presented technical solutions and trade-offs to stakeholders; managed expectations on timelines and scope',
     ],
   },
+  {
+    period: 'AUG 2019 — DEC 2021',
+    role: 'Junior Full Stack Developer (ENO1 / SDE1)',
+    company: 'Credit Suisse · Pune, India',
+    bullets: [
+      'Developed Angular 13 front-end for critical workflow tracking app, reducing Excel reliance by 90%',
+      'Engineered reusable Angular Material CDK components saving 2–3 weeks per integration',
+      'Orchestrated MongoDB cluster PoC with 99% uptime, certificate-based auth, and replication',
+      'Built RESTful APIs and microservices using Spring Boot for internal financial operations tools',
+    ],
+  },
+];
+
+export const certifications = [
+  {
+    name: 'HackerRank Problem Solving (Basic)',
+    issuer: 'HackerRank',
+    type: 'Certificate',
+    link: 'https://www.hackerrank.com/certificates/b1996481c48d',
+  },
+  {
+    name: 'Developing Front-End Apps with React',
+    issuer: 'IBM',
+    type: 'IBM Certification',
+    link: 'https://www.coursera.org/account/accomplishments/verify/ER5MBPR03MQA',
+  },
+  {
+    name: 'HTML5 Application Development Fundamentals',
+    issuer: 'Microsoft Technology Associate',
+    type: 'MTA Certification',
+    link: 'https://www.credly.com/badges/a40742da-fec8-4f9a-b6eb-fcab8b25c754/linked_in',
+  },
+  
 ];

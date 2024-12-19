@@ -36,7 +36,7 @@ export function Nav() {
           listStyle: 'none',
         }}
       >
-        {['About', 'Skills', 'Projects', 'Contact'].map((label) => (
+        {['About', 'Skills', 'Projects', 'Experience', 'Certifications', 'Contact'].map((label) => (
           <li key={label}>
             <Link
               href={`#${label.toLowerCase()}`}
