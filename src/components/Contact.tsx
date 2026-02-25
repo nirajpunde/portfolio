@@ -206,7 +206,7 @@ export function Contact() {
                 +1 (945) 527-5790
               </a>
               <a
-                href="https://linkedin.com/in/nirajpunde"
+                href="https://linkedin.com/in/niraj-punde"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
